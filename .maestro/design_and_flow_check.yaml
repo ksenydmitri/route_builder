@@ -1,0 +1,48 @@
+appId: "com.furiqd.route_builder"
+---
+- launchApp:
+    clearState: true
+
+# Select three stops in the default parcel-count configuration.
+- assertVisible: "Route Builder"
+- assertVisible: "Bluebell Event Hall"
+- tapOn: "Multi-stop"
+- tapOn: "Bluebell Event Hall"
+- scrollUntilVisible:
+    element: "North Cafe"
+    direction: DOWN
+- tapOn: "North Cafe"
+- scrollUntilVisible:
+    element: "Sova Studio Gallery"
+    direction: DOWN
+- tapOn: "Sova Studio Gallery"
+- assertVisible: "Continue (3)"
+- tapOn: "Continue (3)"
+
+# Validation and success remain inline on the Instructions screen.
+- assertVisible: "Instructions"
+- tapOn: "Dispatch Route"
+- assertVisible: "Delivery instruction is required for this stop."
+
+- tapOn:
+    id: "instruction_note_input_stp_1000"
+- inputText: "Leave at the front desk."
+- hideKeyboard
+- tapOn:
+    id: "instruction_note_input_stp_1001"
+- inputText: "Use the north entrance."
+- hideKeyboard
+- scrollUntilVisible:
+    element:
+      id: "instruction_note_input_stp_1002"
+    direction: DOWN
+- tapOn:
+    id: "instruction_note_input_stp_1002"
+- inputText: "Ring the side bell."
+- hideKeyboard
+- tapOn: "Dispatch Route"
+- scrollUntilVisible:
+    element: "Route Dispatched Successfully."
+    direction: UP
+- assertVisible: "Route Dispatched Successfully."
+- assertVisible: "Route ID: .*"
